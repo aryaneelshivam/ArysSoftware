@@ -12,7 +12,7 @@ st.write("""
 Hello 👋 and welcome to arys **stock analysis toolkit**.
 It uses multiple **technical analytical** stratergies to screen and analyse stocks and market 💪
 """)
-st.link_button("GitHub", "https://github.com/aryaneelshivam/ArysStockAnalysis")
+st.link_button("GitHub", "https://github.com/aryaneelshivam/ArysSoftware")
 st.divider()
 
 import numpy as np
