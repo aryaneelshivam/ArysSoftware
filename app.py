@@ -12,7 +12,7 @@ st.write("""
 Hello 👋 and welcome to arys **stock analysis toolkit**.
 It uses multiple **technical analytical** stratergies to screen and analyse stocks and market 💪
 """)
-st.link_button("GitHub", "https://github.com/aryaneelshivam/ArysSoftware")
+st.link_button("GitHub", "https://github.com/aryaneelshivam/ArysStockAnalysis")
 st.divider()
 
 import numpy as np
@@ -180,6 +180,14 @@ ax.set_ylabel("Close Price INR (₨)", fontsize=18)
 ax.grid()
 st.pyplot(fig)
 
+expander = st.expander("See explanation of above indicators")
+expander.write('''
+    The basic idea of **SMA crossover strategy** is to look for the intersections of two SMAs with different periods: 
+    a *fast SMA* and a *slow SMA.* The fast SMA is more responsive to the price movements, while the slow SMA is more stable and smooth. 
+    *When the fast SMA crosses above the slow SMA, it is a bullish signal, **indicating that the price is likely to go up.***
+    *When the fast SMA crosses below the slow SMA, **it is a bearish signal, indicating that the price is likely to go down.***
+''')
+
 # Buy/Sell signals for EMA
 st.write("## Buy/Sell Signals (EMA)")
 fig, ax = plt.subplots(figsize=(14, 8))
@@ -195,6 +203,14 @@ ax.set_ylabel("Close Price INR (₨)", fontsize=18)
 ax.grid()
 st.pyplot(fig)
 
+expander = st.expander("See explanation of above indicators")
+expander.write('''
+    The basic idea of **EMA crossover strategy** is to look for the intersections of two EMAs with different periods: 
+    a *fast EMA* and a *slow EMA.* The fast EMA is more responsive to the price movements, while the slow EMA is more stable and smooth. 
+    *When the fast EMA crosses above the slow EMA, it is a bullish signal, **indicating that the price is likely to go up.***
+    *When the fast EMA crosses below the slow EMA, **it is a bearish signal, indicating that the price is likely to go down.***
+''')
+
 # Buy/Sell signals for Bollinger
 st.write("## Buy/Sell Signals with Bollinger Bands")
 fig, ax = plt.subplots(figsize=(14, 8))
@@ -207,6 +223,13 @@ ax.set_xlabel(f"{start_date} - {end_date}", fontsize=18)
 ax.set_ylabel("Close Price INR (₨)", fontsize=18)
 ax.grid()
 st.pyplot(fig)
+
+expander = st.expander("See explanation of above indicators")
+expander.write('''
+    A common Bollinger Bands® strategy is to look for **overbought and oversold conditions in the market.** 
+    *When the price touches or exceeds the upper band, it may indicate that the **security is overbought** and due for a pullback.* 
+    Conversely, *when the price touches or falls below the lower band, it may indicate that the **security is oversold** and ready for a bounce.*
+''')
 
 # Recommendations using TradingView API
 st.write("## Recommendations")
