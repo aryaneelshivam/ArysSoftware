@@ -29,6 +29,7 @@ plt.style.use('fivethirtyeight')
 yf.pdr_override()
 
 # Sidebar for user input
+st.sidebar.image('logo.png')
 st.sidebar.title("Stock Analysis")
 stock_symbol = st.sidebar.text_input("Enter Stock Symbol", "ZOMATO.NS")
 
