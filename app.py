@@ -6,7 +6,7 @@ st.set_page_config(
     page_icon="💲",
     initial_sidebar_state="expanded",
 )
- 
+st.image('logo.png')
 st.title('arys stock analysis toolkit 🚀')
 st.write("""
 Hello 👋 and welcome to arys **stock analysis toolkit**.
@@ -29,7 +29,6 @@ plt.style.use('fivethirtyeight')
 yf.pdr_override()
 
 # Sidebar for user input
-st.sidebar.image('logo.png')
 st.sidebar.title("Stock Analysis")
 stock_symbol = st.sidebar.text_input("Enter Stock Symbol", "ZOMATO.NS")
 
