@@ -6,7 +6,7 @@ st.set_page_config(
     page_icon="💲",
     initial_sidebar_state="expanded",
 )
-st.image('logo.png')
+
 st.title('arys stock analysis toolkit 🚀')
 st.write("""
 Hello 👋 and welcome to arys **stock analysis toolkit**.
