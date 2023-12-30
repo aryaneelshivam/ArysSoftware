@@ -7,6 +7,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+st.image("https://149753425.v2.pressablecdn.com/wp-content/uploads/2009/06/OSIApproved_100X125.png")
 st.title('arys stock analysis toolkit 🚀')
 st.write("""
 Hello 👋 and welcome to arys **stock analysis toolkit**.
