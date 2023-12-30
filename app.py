@@ -7,6 +7,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+st.image("https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png")
 st.title('arys stock analysis toolkit 🚀')
 st.write("""
 Hello 👋 and welcome to arys **stock analysis toolkit**.
