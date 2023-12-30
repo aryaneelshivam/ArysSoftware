@@ -37,6 +37,7 @@ start_date = st.sidebar.date_input("Start Date", date.today() - timedelta(days=3
 end_date = st.sidebar.date_input("End Date", date.today())
 st.sidebar.divider()
 st.sidebar.write('arys is an analytical toolkit created by **Aryaneel Shivam** to screen stock prices with some **technical parameters**')
+sensitivity = 0.03
 
 
 # Download stock data
@@ -107,6 +108,25 @@ def buy_sellema(stock_data):
             signalSellema.append(np.nan)
     return pd.Series([signalBuyema, signalSellema])
 
+
+#Support-Resistance logic
+support_levels = []
+resistance_levels = []
+
+for i in range(1, len(stock_data['Close']) - 1):
+    previous_close = stock_data['Close'][i - 1]
+    current_close = stock_data['Close'][i]
+    next_close = stock_data['Close'][i + 1]
+
+    if current_close < previous_close and current_close < next_close:
+        support_levels.append(current_close)
+    elif current_close > previous_close and current_close > next_close:
+        resistance_levels.append(current_close)
+
+# Filter levels based on sensitivity
+support_levels = [level for level in support_levels if any(abs(level - s) > sensitivity * level for s in support_levels)]
+resistance_levels = [level for level in resistance_levels if any(abs(level - r) > sensitivity * level for r in resistance_levels)]
+
 # Apply signals to stock data
 stock_data['Buy_Signal_price'], stock_data['Sell_Signal_price'] = buy_sell(stock_data)
 stock_data['Buy_Signal_priceEMA'], stock_data['Sell_Signal_priceEMA'] = buy_sellema(stock_data)
@@ -157,7 +177,7 @@ ax.scatter(stock_data.index , stock_data['Buy_Signal_price'] , label = 'Buy SMA'
 ax.scatter(stock_data.index , stock_data['Sell_Signal_price'] , label = 'Sell SMA' , marker = 'v', color = 'red',alpha =1 )
 ax.scatter(stock_data.index , stock_data['Buy_Signal_priceEMA'] , label = 'Buy EMA' , marker = '^', color = 'black',alpha =1 )
 ax.scatter(stock_data.index , stock_data['Sell_Signal_priceEMA'] , label = 'Sell' , marker = 'v', color = 'purple',alpha =1 )
-ax.set_title(stock_symbol + " Price History with buy and sell signals",fontsize=10, backgroundcolor='blue', color='white')
+ax.set_title(stock_symbol + " Price History with buy and sell signals",fontsize=10, backgroundcolor='white', color='black')
 ax.set_xlabel(f'{start_date} - {end_date}' ,fontsize=18)
 ax.set_ylabel('Close Price INR (₨)' , fontsize=18)
 legend = ax.legend()
@@ -173,10 +193,11 @@ ax.plot(stock_data['SMA5'], label='SMA5', linewidth=1, alpha=0.85)
 ax.plot(stock_data['SMA15'], label='SMA15', linewidth=1, alpha=0.85)
 ax.scatter(stock_data.index, stock_data['Buy_Signal_price'], label='Buy SMA', marker='^', color='green', alpha=1)
 ax.scatter(stock_data.index, stock_data['Sell_Signal_price'], label='Sell SMA', marker='v', color='red', alpha=1)
-ax.set_title(f"{stock_symbol} Price History with Buy and Sell Signals (SMA)", fontsize=10, backgroundcolor='blue',
-             color='white')
+ax.set_title(f"{stock_symbol} Price History with Buy and Sell Signals (SMA)", fontsize=10, backgroundcolor='white',
+             color='black')
 ax.set_xlabel(f"{start_date} - {end_date}", fontsize=18)
 ax.set_ylabel("Close Price INR (₨)", fontsize=18)
+legend = ax.legend()
 ax.grid()
 st.pyplot(fig)
 
@@ -196,10 +217,11 @@ ax.plot(stock_data['EMA5'], label='EMA5', linewidth=1, alpha=0.85)
 ax.plot(stock_data['EMA15'], label='EMA15', linewidth=1, alpha=0.85)
 ax.scatter(stock_data.index, stock_data['Buy_Signal_priceEMA'], label='Buy EMA', marker='^', color='black', alpha=1)
 ax.scatter(stock_data.index, stock_data['Sell_Signal_priceEMA'], label='Sell EMA', marker='v', color='purple', alpha=1)
-ax.set_title(f"{stock_symbol} Price History with Buy and Sell Signals (EMA)", fontsize=10, backgroundcolor='blue',
-             color='white')
+ax.set_title(f"{stock_symbol} Price History with Buy and Sell Signals (EMA)", fontsize=10, backgroundcolor='white',
+             color='black')
 ax.set_xlabel(f"{start_date} - {end_date}", fontsize=18)
 ax.set_ylabel("Close Price INR (₨)", fontsize=18)
+legend = ax.legend()
 ax.grid()
 st.pyplot(fig)
 
@@ -217,10 +239,11 @@ fig, ax = plt.subplots(figsize=(14, 8))
 ax.plot(stock_data['Adj Close'], label=stock_symbol, linewidth=0.5, color='blue', alpha=0.9)
 ax.plot(upper_band, label='Upper Bollinger Band', color='red', linewidth=1.5)
 ax.plot(lower_band, label='Lower Bollinger Band', color='green', linewidth=1.5)
-ax.set_title(f"{stock_symbol} Price History with bollinger bands", fontsize=10, backgroundcolor='blue',
-             color='white')
+ax.set_title(f"{stock_symbol} Price History with bollinger bands", fontsize=10, backgroundcolor='white',
+             color='black')
 ax.set_xlabel(f"{start_date} - {end_date}", fontsize=18)
 ax.set_ylabel("Close Price INR (₨)", fontsize=18)
+legend = ax.legend()
 ax.grid()
 st.pyplot(fig)
 
@@ -229,6 +252,33 @@ expander.write('''
     A common Bollinger Bands® strategy is to look for **overbought and oversold conditions in the market.** 
     *When the price touches or exceeds the upper band, it may indicate that the **security is overbought** and due for a pullback.* 
     Conversely, *when the price touches or falls below the lower band, it may indicate that the **security is oversold** and ready for a bounce.*
+''')
+
+#Buy/Sell support-resistance
+st.write("## Close price with Support-Resistance lines")
+fig, ax = plt.subplots(figsize=(14, 8))
+ax.plot(stock_data['Adj Close'], label=stock_symbol, linewidth=0.5, color='blue', alpha=0.9)
+if support_levels:
+    last_support_level = support_levels[-1]
+    ax.axhline(y=last_support_level, linestyle='--', linewidth=0.8,color='green', label=f'Last Support Level: {last_support_level}')
+
+if resistance_levels:
+    last_resistance_level = resistance_levels[-1]
+    ax.axhline(y=last_resistance_level, linestyle='--', linewidth=0.8,color='red', label=f'Last Resistance Level: {last_resistance_level}')
+ax.set_title(f"{stock_symbol} Price History with Support-Resistance levels", fontsize=10, backgroundcolor='white',
+             color='black')
+ax.set_xlabel(f"{start_date} - {end_date}", fontsize=18)
+ax.set_ylabel("Close Price INR (₨)", fontsize=18)
+ax.legend()
+ax.grid()
+st.pyplot(fig)
+
+#Support-Resistance explainer
+expander = st.expander("See explanation of above indicators")
+expander.write('''
+    **Price support occurs when a surplus of buying activity occurs when an asset’s price drops to a particular area.** 
+    This buying activity causes the *price to move back up and away from the support level.* Resistance is the opposite of support. 
+    Resistance levels are areas where **prices fall due to overwhelming selling pressure.**
 ''')
 
 # Recommendations using TradingView API
