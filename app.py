@@ -7,7 +7,6 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-st.image("github.png")
 st.title('arys stock analysis toolkit 🚀')
 st.write("""
 Hello 👋 and welcome to arys **stock analysis toolkit**.
@@ -39,6 +38,7 @@ end_date = st.sidebar.date_input("End Date", date.today())
 st.sidebar.divider()
 st.sidebar.write('arys is an analytical toolkit created by **Aryaneel Shivam** to screen stock prices with some **technical parameters**')
 st.sidebar.image("https://149753425.v2.pressablecdn.com/wp-content/uploads/2009/06/OSIApproved_100X125.png")
+st.sidebar.image("github.png")
 sensitivity = 0.03
 
 
