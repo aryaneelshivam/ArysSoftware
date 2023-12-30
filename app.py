@@ -173,6 +173,13 @@ ax.plot(stock_data['EMA5'], label = 'EMA5', linewidth=1,alpha = 0.85)
 ax.plot(stock_data['EMA15'], label = 'EMA15', linewidth=1,alpha = 0.85)
 ax.plot(upper_band, label='Upper Bollinger Band', color='red', linewidth=1.5)
 ax.plot(lower_band, label='Lower Bollinger Band', color='green', linewidth=1.5)
+if support_levels:
+    last_support_level = support_levels[-1]
+    ax.axhline(y=last_support_level, linestyle='--', linewidth=0.8,color='green', label=f'Last Support Level: {last_support_level}')
+
+if resistance_levels:
+    last_resistance_level = resistance_levels[-1]
+    ax.axhline(y=last_resistance_level, linestyle='--', linewidth=0.8,color='red', label=f'Last Resistance Level: {last_resistance_level}')
 ax.scatter(stock_data.index , stock_data['Buy_Signal_price'] , label = 'Buy SMA' , marker = '^', color = 'green',alpha =1 )
 ax.scatter(stock_data.index , stock_data['Sell_Signal_price'] , label = 'Sell SMA' , marker = 'v', color = 'red',alpha =1 )
 ax.scatter(stock_data.index , stock_data['Buy_Signal_priceEMA'] , label = 'Buy EMA' , marker = '^', color = 'black',alpha =1 )
