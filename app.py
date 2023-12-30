@@ -198,6 +198,13 @@ fig, ax = plt.subplots(figsize=(14, 8))
 ax.plot(stock_data['Adj Close'], label=stock_symbol, linewidth=0.5, color='blue', alpha=0.9)
 ax.plot(stock_data['SMA5'], label='SMA5', linewidth=1, alpha=0.85)
 ax.plot(stock_data['SMA15'], label='SMA15', linewidth=1, alpha=0.85)
+if support_levels:
+    last_support_level = support_levels[-1]
+    ax.axhline(y=last_support_level, linestyle='--', linewidth=0.8,color='green', label=f'Last Support Level: {last_support_level}')
+
+if resistance_levels:
+    last_resistance_level = resistance_levels[-1]
+    ax.axhline(y=last_resistance_level, linestyle='--', linewidth=0.8,color='red', label=f'Last Resistance Level: {last_resistance_level}')
 ax.scatter(stock_data.index, stock_data['Buy_Signal_price'], label='Buy SMA', marker='^', color='green', alpha=1)
 ax.scatter(stock_data.index, stock_data['Sell_Signal_price'], label='Sell SMA', marker='v', color='red', alpha=1)
 ax.set_title(f"{stock_symbol} Price History with Buy and Sell Signals (SMA)", fontsize=10, backgroundcolor='white',
@@ -222,6 +229,13 @@ fig, ax = plt.subplots(figsize=(14, 8))
 ax.plot(stock_data['Adj Close'], label=stock_symbol, linewidth=0.5, color='blue', alpha=0.9)
 ax.plot(stock_data['EMA5'], label='EMA5', linewidth=1, alpha=0.85)
 ax.plot(stock_data['EMA15'], label='EMA15', linewidth=1, alpha=0.85)
+if support_levels:
+    last_support_level = support_levels[-1]
+    ax.axhline(y=last_support_level, linestyle='--', linewidth=0.8,color='green', label=f'Last Support Level: {last_support_level}')
+
+if resistance_levels:
+    last_resistance_level = resistance_levels[-1]
+    ax.axhline(y=last_resistance_level, linestyle='--', linewidth=0.8,color='red', label=f'Last Resistance Level: {last_resistance_level}')
 ax.scatter(stock_data.index, stock_data['Buy_Signal_priceEMA'], label='Buy EMA', marker='^', color='black', alpha=1)
 ax.scatter(stock_data.index, stock_data['Sell_Signal_priceEMA'], label='Sell EMA', marker='v', color='purple', alpha=1)
 ax.set_title(f"{stock_symbol} Price History with Buy and Sell Signals (EMA)", fontsize=10, backgroundcolor='white',
@@ -246,6 +260,13 @@ fig, ax = plt.subplots(figsize=(14, 8))
 ax.plot(stock_data['Adj Close'], label=stock_symbol, linewidth=0.5, color='blue', alpha=0.9)
 ax.plot(upper_band, label='Upper Bollinger Band', color='red', linewidth=1.5)
 ax.plot(lower_band, label='Lower Bollinger Band', color='green', linewidth=1.5)
+if support_levels:
+    last_support_level = support_levels[-1]
+    ax.axhline(y=last_support_level, linestyle='--', linewidth=0.8,color='green', label=f'Last Support Level: {last_support_level}')
+
+if resistance_levels:
+    last_resistance_level = resistance_levels[-1]
+    ax.axhline(y=last_resistance_level, linestyle='--', linewidth=0.8,color='red', label=f'Last Resistance Level: {last_resistance_level}')
 ax.set_title(f"{stock_symbol} Price History with bollinger bands", fontsize=10, backgroundcolor='white',
              color='black')
 ax.set_xlabel(f"{start_date} - {end_date}", fontsize=18)
