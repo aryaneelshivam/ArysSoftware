@@ -7,7 +7,6 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-st.image("https://149753425.v2.pressablecdn.com/wp-content/uploads/2009/06/OSIApproved_100X125.png")
 st.title('arys stock analysis toolkit 🚀')
 st.write("""
 Hello 👋 and welcome to arys **stock analysis toolkit**.
@@ -38,6 +37,7 @@ start_date = st.sidebar.date_input("Start Date", date.today() - timedelta(days=3
 end_date = st.sidebar.date_input("End Date", date.today())
 st.sidebar.divider()
 st.sidebar.write('arys is an analytical toolkit created by **Aryaneel Shivam** to screen stock prices with some **technical parameters**')
+st.image("https://149753425.v2.pressablecdn.com/wp-content/uploads/2009/06/OSIApproved_100X125.png")
 sensitivity = 0.03
 
 
