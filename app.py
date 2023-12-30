@@ -309,4 +309,5 @@ pie_data = df[existing_cols]
 # Plot the pie chart
 pie_data.T.plot.pie(subplots=True, autopct='%1.1f%%', legend=False, startangle=90)
 plt.title(f"Recommendations for {symbol} on {exchange} - {interval}")
+plt.legend()
 st.pyplot(plt)
