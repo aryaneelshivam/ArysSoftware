@@ -13,6 +13,7 @@ Hello 👋 and welcome to arys **stock analysis toolkit**.
 It uses multiple **technical analytical** stratergies to screen and analyse stocks and market 💪
 """)
 st.link_button("GitHub", "https://github.com/aryaneelshivam/ArysStockAnalysis")
+st.write("[![Follow](<https://img.shields.io/twitter/follow/>aryaneelshivam?style=social)](<https://www.twitter.com/>aryaneelshivam)")
 st.divider()
 
 import numpy as np
