@@ -16,7 +16,7 @@ st.link_button("GitHub", "https://github.com/aryaneelshivam/ArysStockAnalysis")
 st.write(
     """
     [![Star](https://img.shields.io/github/stars/aryaneelshivam/ArysSoftware.svg?logo=github&style=social)](https://gitHub.com/jrieke/year-on-github)
-    &nbsp[![Follow](https://img.shields.io/twitter/follow/jrieke?style=social)](https://www.twitter.com/jrieke)
+    &nbsp[![Follow](https://img.shields.io/twitter/follow/aryaneelshivam?style=social)](https://www.twitter.com/aryaneelshivam)
     """
 )
 st.divider()
