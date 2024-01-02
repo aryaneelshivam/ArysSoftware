@@ -17,6 +17,8 @@ st.write(
     """
     [![Star](https://img.shields.io/github/stars/aryaneelshivam/ArysSoftware.svg?logo=github&style=social)](https://gitHub.com/jrieke/year-on-github)
     [![Follow](https://img.shields.io/twitter/follow/aryaneelshivam?style=social)](https://www.twitter.com/aryaneelshivam)
+    [![Follow](https://img.shields.io/instagram/follow/aryaneelshivam?style=social)](https://www.instagram.com/aryaneelshivam)
+
     """
 )
 st.divider()
