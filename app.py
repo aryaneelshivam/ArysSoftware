@@ -15,10 +15,10 @@ It uses multiple **technical analytical** stratergies to screen and analyse stoc
 st.link_button("GitHub", "https://github.com/aryaneelshivam/ArysStockAnalysis")
 st.write(
     """
+    ![Static Badge](https://img.shields.io/badge/%20version-1.0.0-orange)
     [![Star](https://img.shields.io/github/stars/aryaneelshivam/ArysSoftware.svg?logo=github&style=social)](https://gitHub.com/jrieke/year-on-github)
     [![Follow](https://img.shields.io/twitter/follow/aryaneelshivam?style=social)](https://www.twitter.com/aryaneelshivam)
     ![Static Badge](https://img.shields.io/badge/%20instagram-%40aryaneelshivam-pink?style=social&logo=instagram)
-    
     """
 )
 st.divider()
