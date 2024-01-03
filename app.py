@@ -16,7 +16,7 @@ It uses multiple **technical analytical** stratergies to screen and analyse stoc
 st.link_button("GitHub", "https://github.com/aryaneelshivam/ArysStockAnalysis")
 st.write(
     """
-    ![Static Badge](https://img.shields.io/badge/%20version-1.0.0-orange)
+    ![Static Badge](https://img.shields.io/badge/%20version-1.0.2-orange)
     ![Static Badge](https://img.shields.io/badge/language-python-blue?logo=python&labelColor=white)
     ![Static Badge](https://img.shields.io/badge/powered%20by-streamlit-green?logo=streamlit&labelColor=white)
     ![Static Badge](https://img.shields.io/badge/library-pandas-red?logo=pandas&labelColor=black)
