@@ -8,7 +8,7 @@ st.set_page_config(
 )
 
 st.title('arys stock analysis toolkit 🚀')
-st.subtitle('analyse the market your way 🎉')
+st.subheading('analyse the market your way 🎉')
 st.write("""
 👋 Hello and welcome to arys **stock analysis toolkit**.
 It uses multiple **technical analytical** stratergies to screen and analyse stocks and market.
