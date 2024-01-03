@@ -9,8 +9,8 @@ st.set_page_config(
 
 st.title('arys stock analysis toolkit 🚀')
 st.write("""
-Hello 👋 and welcome to arys **stock analysis toolkit**.
-It uses multiple **technical analytical** stratergies to screen and analyse stocks and market 💪
+👋 Hello and welcome to arys **stock analysis toolkit**.
+It uses multiple **technical analytical** stratergies to screen and analyse stocks and market.
 """)
 st.link_button("GitHub", "https://github.com/aryaneelshivam/ArysStockAnalysis")
 st.write(
