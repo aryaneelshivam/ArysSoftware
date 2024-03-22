@@ -4,3 +4,5 @@ yfinance
 matplotlib
 streamlit
 tradingview_ta 
+plotly
+streamlit-shadcn-ui
