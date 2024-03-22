@@ -48,7 +48,7 @@ stock_symbol = st.sidebar.text_input("Enter Stock Symbol")
 # Date Range Selection
 start_date = st.sidebar.date_input("Start Date", date.today() - timedelta(days=60))
 end_date = st.sidebar.date_input("End Date", date.today())
-st.sidebar.link_button("Go to gallery", "https://docs.google.com/document/d/1DezoHwpJB_qJ9kalaaLAhi1zHLG_KwcUq65Biiiuzqw/edit?usp=sharing")
+st.sidebar.link_button("Read the guide docs 📄", "https://docs.google.com/document/d/1DezoHwpJB_qJ9kalaaLAhi1zHLG_KwcUq65Biiiuzqw/edit?usp=sharing")
 
 sensitivity = 0.03
 
