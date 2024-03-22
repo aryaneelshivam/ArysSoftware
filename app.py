@@ -14,13 +14,13 @@ import plotly.graph_objects as go
 
 
 st.set_page_config(
-    page_title="Versaity",
+    page_title="Veracity",
     page_icon="💰",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
-st.title(':blue[Verasity]wise')
+st.title(':blue[Veracity]wise')
 #st.link_button("GitHub", "https://github.com/aryaneelshivam/ArysStockAnalysis")
 st.write(
     """
