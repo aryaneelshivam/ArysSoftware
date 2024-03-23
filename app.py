@@ -67,10 +67,8 @@ buybutton = st.sidebar.link_button("Get your Key", "https://teenscript.substack.
 st.sidebar.caption('If you dont have a private use-key, then get one and keep it safe.')
 st.sidebar.link_button("Read the guide docs 📄", "https://docs.google.com/document/d/1DezoHwpJB_qJ9kalaaLAhi1zHLG_KwcUq65Biiiuzqw/edit?usp=sharing", use_container_width=True)
 sensitivity = 0.03
-if usekey == "admin1818":
-    useaccess = usekey
-else:
-    st.warning("Enter correct use-key")
+
+
 
 if stock_symbol:
     try:
@@ -191,6 +189,10 @@ if stock_symbol:
             st.write(f"Stock in view ➡ {stock_symbol}")
         with st.expander("Expand to view retrieved stock table"):
             st.dataframe(stock_data)
+        if usekey == "admin1818":
+            useaccess = usekey
+        else:
+            st.warning("Enter correct use-key to access AI features", icon="🚩")
 
         #columns for AI boxes
         box1,box2 = st.columns(2)
