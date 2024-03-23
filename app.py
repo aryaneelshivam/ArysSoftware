@@ -205,13 +205,13 @@ if stock_symbol:
         if generate:
             query_engine = PandasQueryEngine(df=stock_data, verbose=True, synthesize_response=True)
             with st.spinner("Exploring data..."):
-                response = query_engine.query("List down point wise all possible types of relationships and correlations that can be driven out of the dataset in detail with explanations and examples.")
+                response = query_engine.query("Open is the opening price of the stock, high and low are the respective highest and lowest stock prices, EMA5 and EMA15 are the exponential moving averages for 5 and 15 day rolling windows, similarly SMA5 and SMA15 are the simple moving averages for 5 and 15 day rolling windows, take all these into considerations from the dataset and perform a quantative analysis on the stock price.")
             if response:
                 with st.spinner("Analysing data..."):
-                    response2 = query_engine.query("Summarize the entire dataset")
+                    response2 = query_engine.query("Open is the opening price of the stock, high and low are the respective highest and lowest stock prices, EMA5 and EMA15 are the exponential moving averages for 5 and 15 day rolling windows, similarly SMA5 and SMA15 are the simple moving averages for 5 and 15 day rolling windows, take all these into considerations from the dataset and perform pattern recognition and and price prediction.")
             if response2:
                 with st.spinner("Generating summary..."):
-                    response1 = query_engine.query("Analyse the dataset, and drive valuable insights and write a detailed report, the different visualizations, different insightfu; indicators etc.")
+                    response1 = query_engine.query("take all the datapoints and generate a market forecast.")
             if response1:
                 with card_container():
                     st.markdown(response2)
