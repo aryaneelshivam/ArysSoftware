@@ -67,6 +67,10 @@ buybutton = st.sidebar.link_button("Get your Key", "https://teenscript.substack.
 st.sidebar.caption('If you dont have a private use-key, then get one and keep it safe.')
 st.sidebar.link_button("Read the guide docs 📄", "https://docs.google.com/document/d/1DezoHwpJB_qJ9kalaaLAhi1zHLG_KwcUq65Biiiuzqw/edit?usp=sharing", use_container_width=True)
 sensitivity = 0.03
+if usekey == "admin1818":
+    useaccess = usekey
+else:
+    st.warning("Enter correct use-key")
 
 if stock_symbol:
     try:
@@ -192,7 +196,7 @@ if stock_symbol:
         box1,box2 = st.columns(2)
         with box1:
             user_input = st.text_area("Enter your input 💬", placeholder="Enter your question/query", height=200)  
-            enter_button = st.button("Enter 💣", use_container_width=True, type="primary")
+            enter_button = st.button("Enter 💣", use_container_width=True, type="primary", disabled=not useaccess)
             querydata = PandasQueryEngine(df=stock_data, verbose=True, synthesize_response=True)
             if enter_button:
                 if user_input:
@@ -201,7 +205,7 @@ if stock_symbol:
 
         with box2:
             output = st.text_area("Your generated output 🎉", placeholder="The output will be displayed here", value=conv if 'conv' in locals() else "", height=200)
-            generate = st.button("Generate AI report ⚡", use_container_width=True)
+            generate = st.button("Generate AI report ⚡", use_container_width=True, disabled=not useaccess)
 
         #full AI technical analysis logic
         if generate:
