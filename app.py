@@ -214,11 +214,11 @@ if stock_symbol:
                     response1 = query_engine.query("take all the datapoints and generate a market forecast.")
             if response1:
                 with card_container():
-                    st.markdown(response2)
+                    st.info(response2, icon="💡")
                 with card_container():
-                    st.markdown(response1)
+                    st.markdown(response1, icon="🎯")
                 with card_container():
-                    st.markdown(response)
+                    st.markdown(response, icon="📌")
 
 
         with card_container():
