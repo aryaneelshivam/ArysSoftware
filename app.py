@@ -37,6 +37,9 @@ st.write(
     """
 )
 
+#setting up OpenAI Api key
+llm = OpenAI(api_token=st.secrets["OpenAI_Key"])
+openai.api_key = st.secrets["OpenAI_Key"]
 #tab = ui.tabs(options=['Local file', 'Google sheets', 'Airtable', 'Snowflake'], default_value='Local file', key="select")
 
 # Set Matplotlib style
@@ -188,11 +191,11 @@ if stock_symbol:
         with box1:
             user_input = st.text_area("Enter your input 💬", placeholder="Enter your question/query", height=200)  
             enter_button = st.button("Enter 💣", use_container_width=True, type="primary")
+            querydata = PandasQueryEngine(df=stock_data, verbose=True, synthesize_response=True)
             if enter_button:
                 if user_input:
                     with st.spinner():
-                        st.write("Works")
-                        #conv = querydata.query(user_input)
+                        conv = querydata.query(user_input)
 
         with box2:
             output = st.text_area("Your generated output 🎉", placeholder="The output will be displayed here", value=conv if 'conv' in locals() else "", height=200)
@@ -200,10 +203,22 @@ if stock_symbol:
 
         #full AI technical analysis logic
         if generate:
-            st.success("working!")
-
-
-
+            query_engine = PandasQueryEngine(df=stock_data, verbose=True, synthesize_response=True)
+            with st.spinner("Exploring data..."):
+                response = query_engine.query("List down point wise all possible types of relationships and correlations that can be driven out of the dataset in detail with explanations and examples.")
+            if response:
+                with st.spinner("Analysing data..."):
+                    response2 = query_engine.query("Summarize the entire dataset")
+            if response2:
+                with st.spinner("Generating summary..."):
+                    response1 = query_engine.query("Analyse the dataset, and drive valuable insights and write a detailed report, the different visualizations, different insightfu; indicators etc.")
+            if response1:
+                with card_container():
+                    st.markdown(response2)
+                with card_container():
+                    st.markdown(response1)
+                with card_container():
+                    st.markdown(response)
 
 
         with card_container():
