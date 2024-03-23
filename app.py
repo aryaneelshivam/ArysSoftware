@@ -189,6 +189,7 @@ if stock_symbol:
             st.write(f"Stock in view ➡ {stock_symbol}")
         with st.expander("Expand to view retrieved stock table"):
             st.dataframe(stock_data)
+        useaccess = None
         if usekey == "admin1818":
             useaccess = usekey
         else:
