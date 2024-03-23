@@ -205,7 +205,7 @@ if stock_symbol:
         if generate:
             query_engine = PandasQueryEngine(df=stock_data, verbose=True, synthesize_response=True)
             with st.spinner("Exploring data..."):
-                response = query_engine.query("Open is the opening price of the stock, high and low are the respective highest and lowest stock prices, EMA5 and EMA15 are the exponential moving averages for 5 and 15 day rolling windows, similarly SMA5 and SMA15 are the simple moving averages for 5 and 15 day rolling windows, take all these into considerations from the dataset and perform a quantative analysis on the stock price.")
+                response = query_engine.query("Open is the opening price of the stock, high and low are the respective highest and lowest stock prices, EMA5 and EMA15 are the exponential moving averages for 5 and 15 day rolling windows, similarly SMA5 and SMA15 are the simple moving averages for 5 and 15 day rolling windows, take all these into considerations from the dataset and perform a predictive analysis on the stock price.")
             if response:
                 with st.spinner("Analysing data..."):
                     response2 = query_engine.query("Open is the opening price of the stock, high and low are the respective highest and lowest stock prices, EMA5 and EMA15 are the exponential moving averages for 5 and 15 day rolling windows, similarly SMA5 and SMA15 are the simple moving averages for 5 and 15 day rolling windows, take all these into considerations from the dataset and perform pattern recognition and and price prediction.")
