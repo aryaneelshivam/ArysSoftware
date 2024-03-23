@@ -14,3 +14,4 @@ llama-index-embeddings-huggingface
 openai
 ipython
 polars
+streamlit-shadcn-ui
