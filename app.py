@@ -9,6 +9,15 @@ import streamlit_shadcn_ui as ui
 from local_components import card_container
 import plotly.express as px
 import plotly.graph_objects as go
+from pandasai import SmartDataframe
+from pandasai.llm import OpenAI
+from llama_index.core import VectorStoreIndex, ServiceContext, Document
+from llama_index.core.query_engine import PandasQueryEngine
+from llama_index.llms.openai import OpenAI
+from llama_index.core import SimpleDirectoryReader
+import openai
+from IPython.display import Markdown, display
+import time 
 
 
 
