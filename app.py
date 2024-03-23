@@ -63,7 +63,7 @@ start_date = st.sidebar.date_input("Start Date", date.today() - timedelta(days=6
 end_date = st.sidebar.date_input("End Date", date.today())
 st.sidebar.caption("⚠ NOTE: Make sure to keep a minimum of 30-day gap between the start-date and the end-date.")
 st.sidebar.link_button("Read the guide docs 📄", "https://docs.google.com/document/d/1DezoHwpJB_qJ9kalaaLAhi1zHLG_KwcUq65Biiiuzqw/edit?usp=sharing", type="primary", use_container_width=True)
-
+usekey = st.sidebar.text_input("Enter private use-key")
 sensitivity = 0.03
 
 if stock_symbol:
