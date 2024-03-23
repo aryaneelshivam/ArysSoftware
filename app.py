@@ -216,9 +216,9 @@ if stock_symbol:
                 with card_container():
                     st.info(response2, icon="💡")
                 with card_container():
-                    st.markdown(response1, icon="🎯")
+                    st.info(response1, icon="🎯")
                 with card_container():
-                    st.markdown(response, icon="📌")
+                    st.info(response, icon="📌")
 
 
         with card_container():
