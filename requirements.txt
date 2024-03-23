@@ -5,4 +5,12 @@ matplotlib
 streamlit
 tradingview_ta 
 plotly
-streamlit-shadcn-ui
+llama-index
+pandasai==2.0.3
+llama-index-core
+llama-index-llms-openai
+llama-index-llms-replicate
+llama-index-embeddings-huggingface
+openai
+ipython
+polars
