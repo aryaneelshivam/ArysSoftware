@@ -45,9 +45,11 @@ st.sidebar.markdown("""
 
 st.sidebar.caption('We are also available on producthunt! Upvoting the software really helps!')
 stock_symbol = st.sidebar.text_input("Enter Stock Symbol")
+st.sidebar.caption('Enter stock symbol from https://finance.yahoo.com/')
 # Date Range Selection
 start_date = st.sidebar.date_input("Start Date", date.today() - timedelta(days=60))
 end_date = st.sidebar.date_input("End Date", date.today())
+st.sidebar.caption("⚠ NOTE: Make sure to keep a minimum of 30-day gap between the start-date and the end-date.")
 st.sidebar.link_button("Read the guide docs 📄", "https://docs.google.com/document/d/1DezoHwpJB_qJ9kalaaLAhi1zHLG_KwcUq65Biiiuzqw/edit?usp=sharing", type="primary", use_container_width=True)
 
 sensitivity = 0.03
@@ -171,6 +173,28 @@ if stock_symbol:
             st.write(f"Stock in view ➡ {stock_symbol}")
         with st.expander("Expand to view retrieved stock table"):
             st.dataframe(stock_data)
+
+        #columns for AI boxes
+        box1,box2 = st.columns(2)
+        with box1:
+            user_input = st.text_area("Enter your input 💬", placeholder="Enter your question/query", height=200)  
+            enter_button = st.button("Enter 💣", use_container_width=True, type="primary")
+            if enter_button:
+                if user_input:
+                    with st.spinner():
+                        st.write("Works")
+                        #conv = querydata.query(user_input)
+
+        with box2:
+            output = st.text_area("Your generated output 🎉", placeholder="The output will be displayed here", value=conv if 'conv' in locals() else "", height=200)
+            generate = st.button("Generate AI report ⚡", use_container_width=True)
+
+        #full AI technical analysis logic
+        if generate:
+            st.success("working!")
+
+
+
 
 
         with card_container():
