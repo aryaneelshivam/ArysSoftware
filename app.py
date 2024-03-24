@@ -64,7 +64,7 @@ start_date = st.sidebar.date_input("Start Date", date.today() - timedelta(days=6
 end_date = st.sidebar.date_input("End Date", date.today())
 st.sidebar.caption("⚠ NOTE: Make sure to keep a minimum of 30-day gap between the start-date and the end-date.")
 usekey = st.sidebar.text_input("Enter private use-key", placeholder="Enter your private use-key", key="placeholder", type="password")
-buybutton = st.sidebar.link_button("Get your Key", "https://teenscript.substack.com/", type="primary", help="Purchase your private use-key to work with droptable.", use_container_width=True)
+buybutton = st.sidebar.link_button("Get your Key", "https://teenscript.substack.com/", type="primary", help="Purchase your private use-key to work with droptable.", use_container_width=True, disabled=True)
 st.sidebar.caption('If you dont have a private use-key, then get one and keep it safe.')
 st.sidebar.link_button("Read the guide docs 📄", "https://docs.google.com/document/d/1DezoHwpJB_qJ9kalaaLAhi1zHLG_KwcUq65Biiiuzqw/edit?usp=sharing", use_container_width=True)
 sensitivity = 0.03
