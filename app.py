@@ -18,6 +18,7 @@ from llama_index.core import SimpleDirectoryReader
 import openai
 from IPython.display import Markdown, display
 import time 
+import streamlit.components.v1 as components
 
 
 
@@ -67,7 +68,9 @@ buybutton = st.sidebar.link_button("Get your Key", "https://teenscript.substack.
 st.sidebar.caption('If you dont have a private use-key, then get one and keep it safe.')
 st.sidebar.link_button("Read the guide docs 📄", "https://docs.google.com/document/d/1DezoHwpJB_qJ9kalaaLAhi1zHLG_KwcUq65Biiiuzqw/edit?usp=sharing", use_container_width=True)
 sensitivity = 0.03
-
+with st.popover("Open Google Trends popover 📈"):
+            st.markdown("##### Google trends: rising search terms over the last 7 days")
+            components.html("""<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/3620_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("RELATED_QUERIES", {"comparisonItem":[{"keyword":"share price","geo":"IN","time":"now 7-d"}],"category":7,"property":""}, {"exploreQuery":"cat=7&date=now%207-d&geo=IN&q=share%20price&hl=en-GB","guestPath":"https://trends.google.co.in:443/trends/embed/"}); </script>""", height=400)
 
 
 if stock_symbol:
