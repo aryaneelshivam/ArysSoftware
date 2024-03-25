@@ -220,7 +220,7 @@ if stock_symbol:
         if generate:
             query_engine = PandasQueryEngine(df=stock_data, verbose=True, synthesize_response=True)
             with st.spinner("Exploring data..."):
-                response = query_engine.query("")
+                response = query_engine.query("use the columns, profit margins, total cash, total debt, ebdita margins, operation margins, debt to equity, enterprise to endita, net income to common to draft a detailed financial report of the company health and stock performance.")
             if response:
                 with st.spinner("Analysing data..."):
                     response2 = query_engine.query("take all the datapoints and generate a market analysis.")
