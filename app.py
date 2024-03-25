@@ -48,8 +48,6 @@ openai.api_key = st.secrets["OpenAI_Key"]
 yf.pdr_override()
 
 # Sidebar for user input
-
-st.sidebar.caption('We are also available on producthunt! Upvoting the software really helps!')
 stock_symbol = st.sidebar.text_input("Enter Stock Symbol", placeholder="Ex: TATASTEEL.NS")
 # Date Range Selection
 start_date = st.sidebar.date_input("Start Date", date.today() - timedelta(days=60))
