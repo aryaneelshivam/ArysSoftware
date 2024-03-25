@@ -48,13 +48,6 @@ openai.api_key = st.secrets["OpenAI_Key"]
 yf.pdr_override()
 
 # Sidebar for user input
-st.sidebar.markdown("""
-<a href="https://www.producthunt.com/posts/arys-analysis?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-arys&#0045;analysis" target="_blank">
-    <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=432960&theme=light"
-         alt="Arys&#0032;analysis - Open&#0045;sourced&#0044;&#0032;stock&#0032;market&#0032;analysis&#0032;and&#0032;visualization&#0032;webapp | Product Hunt"
-         style="width: 250px; height: 54px;" width="250" height="54" />
-</a>
-""",  unsafe_allow_html=True)
 
 st.sidebar.caption('We are also available on producthunt! Upvoting the software really helps!')
 stock_symbol = st.sidebar.text_input("Enter Stock Symbol", placeholder="Ex: TATASTEEL.NS")
