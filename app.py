@@ -57,7 +57,7 @@ st.sidebar.markdown("""
 """,  unsafe_allow_html=True)
 
 st.sidebar.caption('We are also available on producthunt! Upvoting the software really helps!')
-stock_symbol = st.sidebar.text_input("Enter Stock Symbol")
+stock_symbol = st.sidebar.text_input("Enter Stock Symbol", placeholder="Ex: TATASTEEL.NS")
 # Date Range Selection
 start_date = st.sidebar.date_input("Start Date", date.today() - timedelta(days=60))
 end_date = st.sidebar.date_input("End Date", date.today())
