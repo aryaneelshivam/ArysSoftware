@@ -179,6 +179,7 @@ if stock_symbol:
 
 
         # Display stock data in Streamlit
+        datastore = stock_details.info
         st.info(f"Stock in view ➡ {stock_symbol}",icon="📢")
         st.info(stock_details.info["longBusinessSummary"], icon="💡")
         try:
@@ -204,7 +205,7 @@ if stock_symbol:
         with box1:
             user_input = st.text_area("Enter your input 💬", placeholder="Enter your question/query", height=200)  
             enter_button = st.button("Enter 💣", use_container_width=True, type="primary", disabled=not useaccess)
-            querydata = PandasQueryEngine(df=stock_data, verbose=True, synthesize_response=True)
+            querydata = PandasQueryEngine(df=datastore, verbose=True, synthesize_response=True)
             if enter_button:
                 if user_input:
                     with st.spinner():
@@ -218,7 +219,7 @@ if stock_symbol:
         if generate:
             query_engine = PandasQueryEngine(df=stock_data, verbose=True, synthesize_response=True)
             with st.spinner("Exploring data..."):
-                response = query_engine.query("take all the datapoints and recognize possible patterns.")
+                response = query_engine.query("")
             if response:
                 with st.spinner("Analysing data..."):
                     response2 = query_engine.query("take all the datapoints and generate a market analysis.")
