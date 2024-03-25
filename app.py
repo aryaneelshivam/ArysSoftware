@@ -191,6 +191,7 @@ if stock_symbol:
             Ebidta_margins = stock_details.info["ebitdaMargins"]
             Operations_margins = stock_details.info["operatingMargins"]
             DebtToEquity = stock_details.info["debtToEquity"]
+            ai_df = pd.DataFrame.from_dict(stock_details.info)
         except:
             st.error("Error loading additional information",icon="🚨")
             
@@ -205,7 +206,7 @@ if stock_symbol:
         with box1:
             user_input = st.text_area("Enter your input 💬", placeholder="Enter your question/query", height=200)  
             enter_button = st.button("Enter 💣", use_container_width=True, type="primary", disabled=not useaccess)
-            querydata = PandasQueryEngine(df=stock-details, verbose=True, synthesize_response=True)
+            querydata = PandasQueryEngine(df=ai_df, verbose=True, synthesize_response=True)
             if enter_button:
                 if user_input:
                     with st.spinner():
