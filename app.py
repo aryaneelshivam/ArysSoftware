@@ -77,7 +77,8 @@ if stock_symbol:
     try:
         # Download stock data
         stock_data = yf.download(stock_symbol, start=start_date, end=end_date)
-
+        # additional stock_info for AI analysis
+        stock_details = yf.Ticker(stock_symbol)
         # Calculate technical indicators
         rstd = stock_data['Close'].rolling(window=15).std()
         stock_data['EMA5'] = stock_data['Close'].ewm(span=5).mean()
@@ -188,10 +189,20 @@ if stock_symbol:
 
 
         # Display stock data in Streamlit
-        with card_container():
-            st.write(f"Stock in view ➡ {stock_symbol}")
-        with st.expander("Expand to view retrieved stock table"):
-            st.dataframe(stock_data)
+        st.info(f"Stock in view ➡ {stock_symbol}",icon="📢")
+        st.info(stock_details.info["longBusinessSummary"], icon="💡")
+        try:
+            profitmargins = stock_details.info["profitMargins"]
+            net_income_to_common = stock_details.info["netIncomeToCommon"]
+            enterprise_to_ebitda = stock_details.info["enterpriseToEbitda"]
+            TotalCash = stock_details.info["totalCash"]
+            TotalDebt = stock_details.info["totalDebt"]
+            Ebidta_margins = stock_details.info["ebitdaMargins"]
+            Operations_margins = stock_details.info["operatingMargins"]
+            DebtToEquity = stock_details.info["debtToEquity"]
+        except:
+            st.error("Error loading additional information",icon="🚨")
+            
         useaccess = None
         if usekey == "admin1818":
             useaccess = usekey
