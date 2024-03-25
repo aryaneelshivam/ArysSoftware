@@ -480,4 +480,4 @@ if stock_symbol:
     except:
         st.warning("Wrong Stock symbol, check yahoo finance website for symbols.", icon="⚠")
 else:
-    st.error("Enter a valid stock symbol from Yahoo finance to continue", icon="🚨")
+    st.error("Enter a valid stock symbol from https://finance.yahoo.com/to continue", icon="🚨")
