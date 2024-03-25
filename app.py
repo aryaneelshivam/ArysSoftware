@@ -205,7 +205,7 @@ if stock_symbol:
         with box1:
             user_input = st.text_area("Enter your input 💬", placeholder="Enter your question/query", height=200)  
             enter_button = st.button("Enter 💣", use_container_width=True, type="primary", disabled=not useaccess)
-            querydata = PandasQueryEngine(df=datastore, verbose=True, synthesize_response=True)
+            querydata = PandasQueryEngine(df=stock-details, verbose=True, synthesize_response=True)
             if enter_button:
                 if user_input:
                     with st.spinner():
