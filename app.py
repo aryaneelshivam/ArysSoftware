@@ -187,11 +187,6 @@ if stock_symbol:
         except:
             st.error("Error loading additional information",icon="🚨")
             
-        useaccess = None
-        if usekey == "admin1818":
-            useaccess = usekey
-        else:
-            st.warning("Enter correct use-key to access AI features", icon="🚩")
 
 
         with card_container():
@@ -421,12 +416,15 @@ if stock_symbol:
         pie_data = df[existing_cols]
 
         with card_container():
-            # Plot the pie chart
-            fig = go.Figure(data=[go.Pie(labels=pie_data.columns, values=pie_data.iloc[0], textinfo='label+percent')])
-            fig.update_traces(hole=0.4, hoverinfo="label+percent", textinfo="value", marker=dict(colors=['green', 'red', 'orange', 'blue', 'purple'], line=dict(color='#000000', width=0)))
-            fig.update_layout(title=f"Recommendations for {symbol} on {exchange} - {interval}")
+            try:
+                # Plot the pie chart
+                fig = go.Figure(data=[go.Pie(labels=pie_data.columns, values=pie_data.iloc[0], textinfo='label+percent')])
+                fig.update_traces(hole=0.4, hoverinfo="label+percent", textinfo="value", marker=dict(colors=['green', 'red', 'orange', 'blue', 'purple'], line=dict(color='#000000', width=0)))
+                fig.update_layout(title=f"Recommendations for {symbol} on {exchange} - {interval}")
 
-            st.plotly_chart(fig)
+                st.plotly_chart(fig)
+            except:
+                st.warning("Cannot load stock recommendation for"+stock_symbol)
     except:
         st.warning("Wrong Stock symbol, check yahoo finance website for symbols.", icon="⚠")
 else:
