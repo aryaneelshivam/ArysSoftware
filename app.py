@@ -11,8 +11,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import time 
 import streamlit.components.v1 as components
-
-
+#import pandas_ta as ta
 
 
 st.set_page_config(
@@ -56,7 +55,6 @@ with st.popover("Open Google Trends popover 📈"):
 
 
 if stock_symbol:
-    try:
         # Download stock data
         stock_data = yf.download(stock_symbol, start=start_date, end=end_date)
         # additional stock_info for AI analysis
@@ -69,6 +67,19 @@ if stock_symbol:
         stock_data['SMA15'] = stock_data['Close'].rolling(window=15).mean()
         upper_band = stock_data['SMA15'] + 2 * rstd
         lower_band = stock_data['SMA15'] - 2 * rstd
+
+        # Calculate technical indicators using pandas-ta
+        #stock_data.ta.macd(append=True)
+        #stock_data.ta.rsi(append=True)
+        #stock_data.ta.bbands(append=True)
+        #stock_data.ta.obv(append=True)
+
+        # Calculate Stochastic Oscillator
+        high_14 = stock_data['High'].rolling(window=5).max()
+        low_14 = stock_data['Low'].rolling(window=5).min()
+        stock_data['%K'] = 100 * ((stock_data['Close'] - low_14) / (high_14 - low_14))
+        stock_data['%D'] = stock_data['%K'].rolling(window=3).mean()
+
 
         # Buy and Sell signals for SMA
         def buy_sell(stock_data):
@@ -126,6 +137,43 @@ if stock_symbol:
                     signalSellema.append(np.nan)
             return pd.Series([signalBuyema, signalSellema])
 
+        #stochastic signals logic
+        def calculate_stochastic_signals(stock_data):
+            stochBuy = []
+            stochSell = []
+            position = False
+
+            for i in range(len(stock_data)):
+                if stock_data['%K'][i] < 20 and stock_data['%D'][i] < 20 and stock_data['%K'][i] > stock_data['%D'][i]:
+                    if not position:
+                        stochBuy.append(stock_data['Adj Close'][i])
+                        stochSell.append(np.nan)
+                        position = True
+                    else:
+                        stochBuy.append(np.nan)
+                        stochSell.append(np.nan)
+                elif stock_data['%K'][i] > 80 and stock_data['%D'][i] > 80 and stock_data['%K'][i] < stock_data['%D'][i]:
+                    if position:
+                        stochBuy.append(np.nan)
+                        stochSell.append(stock_data['Adj Close'][i])
+                        position = False
+                    else:
+                        stochBuy.append(np.nan)
+                        stochSell.append(np.nan)
+                else:
+                    stochBuy.append(np.nan)
+                    stochSell.append(np.nan)
+            return pd.Series([stochBuy, stochSell])
+
+        #RSI logic
+        def calculate_rsi(data, window=5):
+            delta = stock_data['Close'].diff()
+            gain = (delta.where(delta > 0, 0)).rolling(window=window).mean()
+            loss = (-delta.where(delta < 0, 0)).rolling(window=window).mean()
+
+            rs = gain / loss
+            rsi = 100 - (100 / (1 + rs))
+            return rsi
 
         #Support-Resistance logic
         support_levels = []
@@ -140,6 +188,7 @@ if stock_symbol:
                 support_levels.append(current_close)
             elif current_close > previous_close and current_close > next_close:
                 resistance_levels.append(current_close)
+
 
         # Filter levels based on sensitivity
         support_levels = [level for level in support_levels if any(abs(level - s) > sensitivity * level for s in support_levels)]
@@ -160,6 +209,10 @@ if stock_symbol:
         # To get latest low price
         newlow = len(stock_data['Low'])-1
         newupdatelow = round(stock_data['Low'][newlow],2)
+
+        # Add buy and sell signals to the DataFrame
+        stock_data['Stoch_Buy'], stock_data['Stoch_Sell'] = calculate_stochastic_signals(stock_data)
+        stock_data['RSI'] = calculate_rsi(stock_data)
 
         cols = st.columns(3)
         with cols[0]:
@@ -239,10 +292,33 @@ if stock_symbol:
 
             st.plotly_chart(fig2)
 
+        ss1, ss2 = st.columns(2)
+        # Plot Stochastic Oscillator
+        fig3 = go.Figure()
+        with ss1:
+            fig3 = go.Figure()
+            fig3.add_trace(go.Scatter(x=stock_data.index, y=stock_data['%K'], mode='lines', name='%K', line=dict(color='blue')))
+            fig3.add_trace(go.Scatter(x=stock_data.index, y=stock_data['%D'], mode='lines', name='%D', line=dict(color='red')))
+            fig3.add_trace(go.Scatter(x=stock_data.index, y=stock_data['Stoch_Buy'], name='Buy Signal (Stochastic)', mode='markers', marker=dict(color='green', symbol='triangle-up')))
+            fig3.add_trace(go.Scatter(x=stock_data.index, y=stock_data['Stoch_Sell'], name='Sell Signal (Stochastic)', mode='markers', marker=dict(color='red', symbol='triangle-down')))
+            fig3.update_layout(title='Stochastic Oscillator',
+                               xaxis_title='Date',
+                               yaxis_title='Value',
+                               legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1))
+            st.plotly_chart(fig3)
 
+        with ss2:
+            fig_rsi = go.Figure()
+            fig_rsi.add_trace(go.Scatter(x=stock_data.index, y=stock_data['RSI'], mode='lines', name='RSI', line=dict(color='purple')))
+            fig_rsi.update_layout(title='Relative Strength Index (RSI)',
+                                  xaxis_title='Date',
+                                  yaxis_title='RSI Value',
+                                  legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1))
+
+            # Display plots
+            st.plotly_chart(fig_rsi)
 
         # Buy/Sell signals for SMA
-
         fig = go.Figure()
         with card_container():
             # Plotting stock data
@@ -391,6 +467,7 @@ if stock_symbol:
             Resistance levels are areas where **prices fall due to overwhelming selling pressure.**
         ''')
 
+
         # Recommendations using TradingView API
         symbol = stock_symbol.split('.')[0]  # Removing the exchange from the symbol
         screener = "india"
@@ -425,7 +502,4 @@ if stock_symbol:
                 st.plotly_chart(fig)
             except:
                 st.warning("Cannot load stock recommendation for"+stock_symbol)
-    except:
-        st.warning("Wrong Stock symbol, check yahoo finance website for symbols.", icon="⚠")
-else:
-    st.error("Enter a valid stock symbol from https://finance.yahoo.com/ to continue", icon="🚨")
+
