@@ -9,14 +9,6 @@ import streamlit_shadcn_ui as ui
 from local_components import card_container
 import plotly.express as px
 import plotly.graph_objects as go
-from pandasai import SmartDataframe
-from pandasai.llm import OpenAI
-from llama_index.core import VectorStoreIndex, ServiceContext, Document
-from llama_index.core.query_engine import PandasQueryEngine
-from llama_index.llms.openai import OpenAI
-from llama_index.core import SimpleDirectoryReader
-import openai
-from IPython.display import Markdown, display
 import time 
 import streamlit.components.v1 as components
 
@@ -39,8 +31,8 @@ st.write(
 )
 
 #setting up OpenAI Api key
-llm = OpenAI(api_token=st.secrets["OpenAI_Key"])
-openai.api_key = st.secrets["OpenAI_Key"]
+#llm = OpenAI(api_token=st.secrets["OpenAI_Key"])
+#openai.api_key = st.secrets["OpenAI_Key"]
 #tab = ui.tabs(options=['Local file', 'Google sheets', 'Airtable', 'Snowflake'], default_value='Local file', key="select")
 
 # Set Matplotlib style
@@ -53,9 +45,9 @@ stock_symbol = st.sidebar.text_input("Enter Stock Symbol", placeholder="Ex: TATA
 start_date = st.sidebar.date_input("Start Date", date.today() - timedelta(days=60))
 end_date = st.sidebar.date_input("End Date", date.today())
 st.sidebar.caption("⚠ NOTE: Make sure to keep a minimum of 30-day gap between the start-date and the end-date.")
-usekey = st.sidebar.text_input("Enter private use-key", placeholder="Enter your private use-key", key="placeholder", type="password")
-buybutton = st.sidebar.link_button("Get your Key", "https://teenscript.substack.com/", type="primary", help="Purchase your private use-key to work with veracity.", use_container_width=True, disabled=True)
-st.sidebar.caption('If you dont have a private use-key, then get one and keep it safe.')
+#usekey = st.sidebar.text_input("Enter private use-key", placeholder="Enter your private use-key", key="placeholder", type="password")
+#buybutton = st.sidebar.link_button("Get your Key", "https://teenscript.substack.com/", type="primary", help="Purchase your private use-key to work with veracity.", use_container_width=True, disabled=True)
+#st.sidebar.caption('If you dont have a private use-key, then get one and keep it safe.')
 st.sidebar.link_button("Read the guide docs 📄", "https://docs.google.com/document/d/1DezoHwpJB_qJ9kalaaLAhi1zHLG_KwcUq65Biiiuzqw/edit?usp=sharing", use_container_width=True)
 sensitivity = 0.03
 with st.popover("Open Google Trends popover 📈"):
@@ -200,40 +192,6 @@ if stock_symbol:
             useaccess = usekey
         else:
             st.warning("Enter correct use-key to access AI features", icon="🚩")
-
-        #columns for AI boxes
-        box1,box2 = st.columns(2)
-        with box1:
-            user_input = st.text_area("Enter your input 💬", placeholder="Enter your question/query", height=200)  
-            enter_button = st.button("Enter 💣", use_container_width=True, type="primary", disabled=not useaccess)
-            querydata = PandasQueryEngine(df=ai_df, verbose=True, synthesize_response=True)
-            if enter_button:
-                if user_input:
-                    with st.spinner():
-                        conv = querydata.query(user_input)
-
-        with box2:
-            output = st.text_area("Your generated output 🎉", placeholder="The output will be displayed here", value=conv if 'conv' in locals() else "", height=200)
-            generate = st.button("Generate AI report ⚡", use_container_width=True, disabled=not useaccess)
-
-        #full AI technical analysis logic
-        if generate:
-            query_engine = PandasQueryEngine(df=stock_data, verbose=True, synthesize_response=True)
-            with st.spinner("Exploring data..."):
-                response = query_engine.query("use the columns, profit margins, total cash, total debt, ebdita margins, operation margins, debt to equity, enterprise to endita, net income to common to draft a detailed financial report of the company health and stock performance.")
-            if response:
-                with st.spinner("Analysing data..."):
-                    response2 = query_engine.query("take all the datapoints and generate a market analysis.")
-            if response2:
-                with st.spinner("Generating summary..."):
-                    response1 = query_engine.query("take all the datapoints and generate a market forecast.")
-            if response1:
-                with card_container():
-                    st.info(response2, icon="💡")
-                with card_container():
-                    st.info(response1, icon="🎯")
-                with card_container():
-                    st.info(response, icon="📌")
 
 
         with card_container():
